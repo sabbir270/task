@@ -2,6 +2,9 @@
 
 This repository contains the code for a Django project that includes integration with Plotly for data visualization and CRUD operation.
 
+
+live link: https://mytasksite.pythonanywhere.com/
+
 ## Overview
 
 In this project, I developed a web application using Django, a popular web framework for Python. The application load data from a dataset, CRUD operations and visualizes it using various charts, including line charts and bar charts, using the Plotly library.
