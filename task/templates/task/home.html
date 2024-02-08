@@ -1,9 +1,17 @@
 {% extends "base.html" %}
-
 {% block title %}Stock Data - My Website{% endblock %}
 {% block content %}
 <div class="container">
+    <div class="mt-3">
+        <div id="line_chart">  {{ chart|safe }}</div>
+    </div>
     <h1 class="mt-5">Stock Data</h1>
+    <tr>
+        <td colspan="7"></td> <!-- colspan to span across all columns except the last one -->
+        <td>
+            <a href="{% url 'task:create_stock_data' %}" class="btn btn-success btn-sm">Create New Data</a>
+        </td>
+    </tr>
     <table class="table mt-3">
         <thead>
             <tr>
@@ -14,6 +22,7 @@
                 <th>Open</th>
                 <th>Close</th>
                 <th>Volume</th>
+                <th>Actions</th>  <!-- New column for actions -->
             </tr>
         </thead>
         <tbody>
@@ -26,11 +35,17 @@
                 <td>{{ data.open }}</td>
                 <td>{{ data.close }}</td>
                 <td>{{ data.volume }}</td>
+                <td>
+                    <a href="{% url 'task:edit_stock_data' data.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                    <form action="{% url 'task:delete_stock_data' data.pk %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
     {% if page.has_other_pages %}
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center mt-3">
@@ -46,7 +61,6 @@
                 </a>
             </li>
             {% endif %}
-
             {% for num in page.paginator.page_range %}
                 {% if num == page.number %}
                     <li class="page-item active"><span class="page-link">{{ num }}</span></li>
@@ -56,7 +70,6 @@
                     </li>
                 {% endif %}
             {% endfor %}
-
             {% if page.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page.next_page_number }}" aria-label="Next">
@@ -73,4 +86,6 @@
     </nav>
     {% endif %}
 </div>
+
+
 {% endblock %}
