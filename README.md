@@ -28,11 +28,6 @@ To run this project locally, follow these steps:
 
 Once the project is set up, you can access the web application by visiting http://localhost:8000/ in your web browser. The application allows you to view stock data, perform CRUD operations and visualize it using various charts generated with Plotly.
 
-## Contributing
-
-Contributions to this project are welcome. If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request.
-
-
 
 ## Challenges Faced
 
